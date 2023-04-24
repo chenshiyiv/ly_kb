@@ -286,6 +286,7 @@ export default {
       Mediumbroadbandbar: {},
       finishedgrose: {},
       finishedmrose: {},
+
       datetype: [
         { name: '日', type: 1 },
         { name: '月', type: 2 },
