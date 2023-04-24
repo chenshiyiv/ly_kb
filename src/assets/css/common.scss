@@ -1,0 +1,103 @@
+$ycolor: #E6A23C;
+$rcolor: #F56C6C;
+$bcolor: #409EFF;
+$gcolor: #909399;
+
+.red {
+  color: $rcolor;
+}
+
+.blue {
+  color: $bcolor;
+}
+
+.yellow {
+  color: $ycolor;
+}
+
+.grey {
+  color: $gcolor;
+}
+
+.fontW {
+  font-weight: bold;
+}
+
+.borderLeft {
+  border-left: 1px solid #636262;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+  background-color: #ebeef5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  // box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  // -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  background: rgba(63, 175, 231, 0.5);
+}
+
+.borderLeft {
+  border-left: 1px solid #636262
+}
+
+
+.dis {
+  .el-descriptions__cell {
+    .el-descriptions__label.title {
+      font-weight: bold;
+      text-shadow: 0px 8.62px 8.62px #000000, 0px 2.46px 29.53px #00f2ff;
+    }
+  }
+
+  .el-descriptions__body .el-descriptions__table.is-bordered .el-descriptions__cell {
+    padding: 0.01rem 0.05rem;
+  }
+
+  .el-descriptions__label.el-descriptions__cell.is-bordered-label {
+    background: transparent;
+    color: #fff;
+    font-size: 0.06rem;
+    text-shadow: 0px 0px 5px #000000, 0px 0px 15px #00f2ff;
+  }
+
+  .el-descriptions__content.el-descriptions__cell.is-bordered-content {
+    color: #fff;
+    font-size: 0.06rem;
+    text-shadow: 0px 2.52px 5px #000000, 0px 2.52px 5px #05838a;
+  }
+
+  .el-descriptions__cell {
+    span:first-child {
+      width: 30%;
+      color: #fff;
+      text-shadow: 0px 2.52px 30.25px #00f2ff, 0px 2.52px 30.25px #00f2ff;
+    }
+
+    span:nth-child(2) {
+      color: #01ff68;
+      font-family: Microsoft YaHei, Microsoft YaHei-Bold;
+      text-shadow: 0px 2.52px 30.25px #00f2ff;
+    }
+  }
+
+  .el-descriptions__body {
+    // padding: 0.05rem;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .el-descriptions__title {
+    color: #ffffff;
+    text-shadow: 0px 8.62px 8.62px #000000, 0px 2.46px 29.53px #00f2ff;
+  }
+
+}

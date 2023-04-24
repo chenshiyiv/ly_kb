@@ -1,0 +1,46 @@
+html, body, p,ol, ul, li, dl, dt, dd, blockquote, figure, fieldset,
+H5  legend, textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {margin: 0; padding: 0; }h1, h2, h3, h4, h5, h6 {font-size: 100%; font-weight: normal; }ul {list-style: none; }button, input, select, textarea { margin: 0; }html { box-sizing: border-box; }*, *:before, *:after { box-sizing: inherit;
+}img, embed, iframe, object, video { height: auto; max-width: 100%; }audio { max-width: 100%; }iframe { border: 0; }table { border-collapse: collapse; border-spacing: 0; }td, th {padding: 0; text-align: left; }html, body { height: 100%; }#root { width: 100%; height: 100%; }
+a{text-decoration: none;}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+
+  margin: 0px;
+  /* background-color: black; */
+  overflow: hidden;
+  /*禁止显示滚动条*/
+  font-family: Open Sans,-apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+}
+
+#app {
+  background-color: transparent;
+  user-select: none;
+  height: 100%;
+}
+/* 
+span [id^= "playerInfoPanelMarker_"] {
+  display: none;
+} */
+
+/* @font-face {
+    font-family: "orbitron";
+    src: url("../font/BB3116.TTF");
+  } */
+  /* @font-face {
+    font-family: "terminal";
+    src: url("../font/VGA936.FON");
+  }  */
+  /*
+  @font-face {
+    font-family: "TTTGB-Medium";
+    src: url("../font/douyuFont.otf");
+    font-weight: normal;
+    font-style: normal;
+  } */
+ 
