@@ -47,13 +47,62 @@ export function SlabYardBarAPI(v) {
     url: `PMBoard/H1W1SlabYardBar`, params: { type: v.type, time: v.time }
   })
 }
-// 高线-中宽带 --- 成品库有单无单
+// 高线-中宽带 --- 成品库玫瑰图
 export function ProdYardOrderAPI(v) {
   return request({
     method: 'get',
-    url: `PMBoard/H1W1ProdYardOrder`, params: { type: v }
+    url: 'PMBoard/H1W1ProdYardOrder',
+    params: { type: v }
+  })
+}
+// 棒材总览横柱图
+export function BOverviewAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/BOverview`
+  })
+}
+// 棒材试试库存量
+export function BYardOverviewAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/BYardOverview`
   })
 }
 
+// 棒材总览
+export function PMBOverviewAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/BOverview`
+  })
+}
+// 棒材总览
+export function pmBYardOverviewAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/BYardOverview`
+  })
+}
+// 棒材坯料柱状图
+export function BSlabYardBarAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/BSlabYardBar`
+  })
+}
+// 棒材坯料折线图
 
-
+export function BSlabYardLineAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/BSlabYardLine`
+  })
+}
+// dimen  棒材成品库-ok
+export function BProdYardBarAPI(v) {
+  return request({
+    method: 'get',
+    url: `PMBoard/BProdYardBar`, params: { type: v }
+  })
+}

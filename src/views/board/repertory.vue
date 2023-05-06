@@ -1,9 +1,7 @@
 <template>
   <!-- 库存看板 -->
   <div class="repertory">
-    <div class="tit">
-      <!-- 凌钢优特钢库存看板 -->
-    </div>
+    <div class="tit">凌钢优特钢库存看板</div>
     <div class="content">
       <div class="first_half">
         <div class="first_half_box">
@@ -122,6 +120,7 @@
                 :xdata="finishedgline.xdata"
               />
             </div>
+
             <div class="half_box_def">
               <Chartrose :title="'成品库有单无单百分比'" :data="finishedgrose.data" />
             </div>
@@ -183,12 +182,12 @@
           <div class="box_tit">棒材总览</div>
           <div class="second_content">
             <div class="bartitle">
-              <div>实时库存总量：213.34</div>
-              <div>当日累计消耗量：122</div>
+              <div>实时库存总量：{{ Baroverviewiny.data }}</div>
+              <div>当日累计消耗量：{{ Baroverview.dayconsume }}</div>
               <div class="boxt">钢坯坯料库各产线库存量</div>
             </div>
             <div class="bar">
-              <LandscapeBar />
+              <LandscapeBar :seriesData="Baroverview.data" />
             </div>
           </div>
         </div>
@@ -198,45 +197,98 @@
               <div class="two_item">
                 <div class="box_tit">棒材坯料库</div>
                 <div class="btm_content">
-                  <ChartBar :seriesData="storeroom" :legend="true" />
+                  <ChartBar :seriesData="YardBar.data" :legend="true" :xdata="YardBar.xdata" />
                 </div>
               </div>
               <div class="two_item">
-                <div class="box_tit"></div>
+                <div class="box_tit">棒材轧制量</div>
                 <div class="btm_content">
-                  <ChartLine :legend="true" />
+                  <ChartLine :legend="true" :data="YardLine.data" :xdata="YardLine.xdata" />
                 </div>
               </div>
             </div>
             <div class="content_item">
               <div class="two_item">
                 <div class="box_tit a1">1号棒材成品库</div>
+                <!-- <div class="btmtab">
+                  <div
+                    class="btntabitem"
+                    :class="{ chose: finishedone == index }"
+                    v-for="(item, index) in finishedtype"
+                    :key="item.type"
+                  >
+                    {{ item.name }}
+                  </div>
+                </div> -->
                 <div class="btm_content">
-                  <ChartBar />
+                  <ChartBar :seriesData="finished1.data" :xdata="finished1.xdata" />
                 </div>
               </div>
               <div class="two_item">
                 <div class="box_tit a1">2号棒材成品库</div>
+                <!-- <div class="btmtab">
+                  <div
+                    class="btntabitem"
+                    :class="{ chose: finishedtwo == index }"
+                    v-for="(item, index) in finishedtype"
+                    :key="item.type"
+                  >
+                    {{ item.name }}
+                  </div>
+                </div> -->
+
                 <div class="btm_content">
-                  <ChartBar />
+                  <ChartBar :seriesData="finished2.data" :xdata="finished2.xdata" />
                 </div>
               </div>
               <div class="two_item">
                 <div class="box_tit a1">3号棒材成品库</div>
+                <!-- <div class="btmtab">
+                  <div
+                    class="btntabitem"
+                    :class="{ chose: finishedthree == index }"
+                    v-for="(item, index) in finishedtype"
+                    :key="item.type"
+                  >
+                    {{ item.name }}
+                  </div>
+                </div> -->
+
                 <div class="btm_content">
-                  <ChartBar />
+                  <ChartBar :seriesData="finished3.data" :xdata="finished3.xdata" />
                 </div>
               </div>
               <div class="two_item">
                 <div class="box_tit a1">4号棒材成品库</div>
+                <!-- <div class="btmtab">
+                  <div
+                    class="btntabitem"
+                    :class="{ chose: finishedfour == index }"
+                    v-for="(item, index) in finishedtype"
+                    :key="item.type"
+                  >
+                    {{ item.name }}
+                  </div>
+                </div> -->
                 <div class="btm_content">
-                  <ChartBar />
+                  <ChartBar :seriesData="finished4.data" :xdata="finished4.xdata" />
                 </div>
               </div>
               <div class="two_item">
                 <div class="box_tit a1">5号棒材成品库</div>
+                <!-- <div class="btmtab">
+                  <div
+                    class="btntabitem"
+                    :class="{ chose: finishedfive == index }"
+                    v-for="(item, index) in finishedtype"
+                    :key="item.type"
+                  >
+                    {{ item.name }}
+                  </div>
+                </div> -->
+
                 <div class="btm_content">
-                  <ChartBar />
+                  <ChartBar :seriesData="finished5.data" :xdata="finished5.xdata" />
                 </div>
               </div>
             </div>
@@ -255,13 +307,18 @@ import LandscapeBar from '@/components/Mycharts/landscapeBar.vue'
 import Chartrose from '@/components/Mycharts/Chartrose.vue'
 import { toRefs, reactive } from 'vue'
 import {
-  ProdYardOrderAPI,
   ProdYardAPI,
   StockPieAPI,
   StockLineAPI,
   daydataAPI,
   SlabYardAPI,
-  SlabYardBarAPI
+  SlabYardBarAPI,
+  PMBOverviewAPI,
+  pmBYardOverviewAPI,
+  BSlabYardBarAPI,
+  BSlabYardLineAPI,
+  BProdYardBarAPI,
+  ProdYardOrderAPI
 } from '@/api/https.js'
 
 export default {
@@ -273,6 +330,7 @@ export default {
         right: '5%',
         bottom: '3%'
       },
+
       ylgdata: [],
       goodsteeldata: [],
       ylglinedata: [],
@@ -286,7 +344,15 @@ export default {
       Mediumbroadbandbar: {},
       finishedgrose: {},
       finishedmrose: {},
-
+      Baroverview: {},
+      Baroverviewiny: {},
+      YardBar: {},
+      YardLine: {},
+      finished1: {},
+      finished2: {},
+      finished3: {},
+      finished4: {},
+      finished5: {},
       datetype: [
         { name: '日', type: 1 },
         { name: '月', type: 2 },
@@ -301,12 +367,21 @@ export default {
         { name: '高线', type: 2 },
         { name: '中宽带', type: 3 }
       ],
+      finishedtype: [
+        { name: '重量', type: 1 },
+        { name: '支数', type: 2 }
+      ],
       steel: 0,
       excellent: 0,
       feed: 0,
       heightline: 0,
       direction_top: 0,
       direction_btm: 0,
+      finishedone: 0,
+      finishedtwo: 0,
+      finishedthree: 0,
+      finishedfour: 0,
+      finishedfive: 0,
       storeroom: [
         {
           name: '示例',
@@ -323,6 +398,39 @@ export default {
       ]
     })
     let methods = {
+      async BProdYardBar(v) {
+        let res = await BProdYardBarAPI(v)
+        if (v == 1) {
+          state.finished1 = res.data
+        } else if (v == 2) {
+          state.finished2 = res.data
+        } else if (v == 3) {
+          state.finished3 = res.data
+        } else if (v == 4) {
+          state.finished4 = res.data
+        } else if (v == 5) {
+          state.finished5 = res.data
+        }
+      },
+      // 棒材坯料折线图
+      async BSlabYardLine() {
+        let res = await BSlabYardLineAPI()
+        state.YardLine = res.data
+      },
+      // 棒材坯料柱状图
+      async BSlabYardBar() {
+        let res = await BSlabYardBarAPI()
+        state.YardBar = res.data
+      },
+      // 棒材总览
+      async PMBOverview() {
+        let res = await PMBOverviewAPI()
+        state.Baroverview = res.data
+      },
+      async pmBYardOverview() {
+        let res = await pmBYardOverviewAPI()
+        state.Baroverviewiny = res.data
+      },
       // 炼钢库存去向
       async Tosteel(index, item) {
         state.steel = index
@@ -404,16 +512,18 @@ export default {
       // 高线-中宽带 --- 成品库有单无单玫瑰饼图
       async ProdYardOrder(v) {
         let res = await ProdYardOrderAPI(v)
-        console.log(res, 'res')
         if (v == 1) {
           // 高线坯料库历史库存
-          state.finishedgrose = res.data
+          state.finishedgrose = res
+          console.log(state.finishedgrose, 'state.finishedgrose')
         } else {
           // 中宽带坯料库历史库存
-          state.finishedmrose = res.data
+          state.finishedmrose = res
+          console.log(state.finishedmrose, 'state.finishedmrose')
         }
       }
     }
+
     methods.StockPie()
     methods.StockPie({ type: 1, source: 2 }, 'good')
     methods.StockLine()
@@ -427,6 +537,16 @@ export default {
     methods.ProdYard(2)
     methods.ProdYardOrder(1)
     methods.ProdYardOrder(2)
+    methods.PMBOverview()
+    methods.pmBYardOverview()
+    methods.BSlabYardBar()
+    methods.BSlabYardLine()
+    methods.BProdYardBar(1)
+    methods.BProdYardBar(2)
+    methods.BProdYardBar(3)
+    methods.BProdYardBar(4)
+    methods.BProdYardBar(5)
+
     return { ...toRefs(state), ...methods }
   },
   components: {
@@ -445,6 +565,30 @@ export default {
   background-size: 100% 100% !important;
   color: #fff !important;
 }
+.btmtab {
+  width: 35%;
+  height: 8.5%;
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .btntabitem {
+    color: #fff;
+    width: 45%;
+    height: 100%;
+    // border: 1px solid springgreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5%;
+    background: url('~@/assets/img/def_btn.png') no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+    z-index: 9;
+  }
+}
+
 .repertory {
   width: 100%;
   height: 100vh;
@@ -482,7 +626,7 @@ export default {
       background-size: 100% 100%;
       .box_tit {
         width: 100%;
-        height: 10%;
+        height: 8%;
         // border: 1px solid red;
         background: url('~@/assets/img/255.png') no-repeat;
         background-size: 100% 100%;
@@ -665,7 +809,7 @@ export default {
     display: flex;
     .box_tit {
       width: 100%;
-      height: 10%;
+      height: 8%;
       background: url('~@/assets/img/255.png') no-repeat;
       background-size: 100% 100%;
       color: #fff;
@@ -709,7 +853,7 @@ export default {
       }
       .box_tit {
         width: 100%;
-        height: 10%;
+        height: 8%;
         background: url('~@/assets/img/small.png') no-repeat;
         background-size: 100% 100%;
       }
@@ -734,15 +878,17 @@ export default {
             height: 100%;
             flex: 1;
             margin: 0 0.3%;
+            position: relative;
 
             .btm_content {
               width: 100%;
               height: 80%;
+              position: relative;
             }
 
             .box_tit {
               width: 100%;
-              height: 18%;
+              height: 15%;
               background: url('~@/assets/img/255.png') no-repeat;
               background-size: 100% 100%;
               color: #fff;
@@ -767,5 +913,15 @@ export default {
       }
     }
   }
+}
+
+::v-deep .el-select {
+  position: absolute;
+  width: 31%;
+  right: 2%;
+  top: 0;
+}
+::v-deep .el-select .el-input__wrapper {
+  height: 20px;
 }
 </style>

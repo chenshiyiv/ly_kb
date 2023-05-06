@@ -54,10 +54,10 @@ export default {
             show: false,
             top: 'bottom'
           },
-
+          tooltip: {},
           series: [
             {
-              name: 'Nightingale Chart',
+              name: '',
               type: 'pie',
               radius: [20, 60],
               center: ['50%', '50%'],
@@ -88,7 +88,6 @@ export default {
       props,
       newVal => {
         if (newVal) {
-          // console.log(newVal, 'newval')
           methods.drawLine() //调用ECharts的方法重新绘制
         }
       },

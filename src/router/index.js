@@ -6,6 +6,7 @@ const routes = [
   {
     path: '/',
     name: "index",
+    redirect: '/repertory',
     component: () => import('@/views/board/index.vue'),
   },
   // 库存

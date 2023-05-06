@@ -61,7 +61,6 @@ export default {
           ['rgba(	173,109,255, 1)', 'rgba(173,109,255, 0)'],
           ['rgba(	0, 255, 0, 1)', 'rgba(0, 241, 226, 0)']
         ]
-        const xAxisData = ['8#', '9#', '10#', '11#', '12#', '13#', '14#', '15#', '16#', '17#']
 
         const seriesData = props.seriesData
 
@@ -159,7 +158,7 @@ export default {
               type: 'category',
               interval: 0,
               // 	boundaryGap: true,//坐标轴两边留白
-              data: xAxisData,
+              data: props.xdata,
               axisLabel: {
                 //坐标轴刻度标签的相关设置。
                 //		interval: 0,//设置为 1，表示『隔一个标签显示一个标签』
@@ -209,7 +208,7 @@ export default {
                 }
               },
               axisLine: {
-                show: true,
+                show: false,
                 lineStyle: {
                   color: '#fff'
                 }

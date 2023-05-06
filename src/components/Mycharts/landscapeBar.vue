@@ -52,7 +52,7 @@ export default {
         return {
           top: '22% ',
           left: '3%',
-          right: '4%',
+          right: '20%',
           height: '70%',
           bottom: '0',
           containLabel: true
@@ -88,7 +88,7 @@ export default {
           },
           grid: {
             left: '5%',
-            right: '7%',
+            right: '17%',
             top: '5%',
             bottom: '2%',
             containLabel: true
