@@ -106,3 +106,206 @@ export function BProdYardBarAPI(v) {
     url: `PMBoard/BProdYardBar`, params: { type: v }
   })
 }
+
+
+// 轧钢质量看板
+
+// 加热炉生产跟踪进度
+export function HFProd1API() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/HFProd1`
+  })
+}
+export function HFProd2API() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/HFProd2`
+  })
+}
+export function HFProd3API() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/HFProd3`
+  })
+}
+// 当前班组生产指标分析
+export function MillProdDataAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/MillProdData`
+  })
+}
+// 加热炉入炉温度跟踪
+export function HFDataAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/HFData`
+  })
+}
+// 加热炉加热时长跟踪
+export function HFData3API() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/HFData3`
+  })
+}
+// 扎线轧制温度跟踪
+export function HFData4API() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/HFData4`
+  })
+}
+// 质量异议缺陷类型分布
+export function Mill_qualityAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/Mill_quality`
+  })
+}
+// 温度命中率分析
+export function Mill_hitrateAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/Mill_hitrate
+    `
+  })
+}
+// 成材率分析
+export function Mill_yieldAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/Mill_yield`
+  })
+}
+
+// 定尺率分析
+export function Mill_fixlengthAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/Mill_fixlength`
+  })
+}
+// 扎线生产跟踪进度
+export function MillProdAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/MillProd
+    `
+  })
+}
+
+export function MillProd2API() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Mill/MillProd2
+    `
+  })
+}
+
+// 炉次生产进跟踪热力图
+export function latest_prodAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Steel/latest_prod`
+  })
+}
+// 生产炉次数量 和 告警数量
+export function prod_heat_countAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Steel/prod_heat_count
+    `
+  })
+}
+
+// 冶炼节奏
+export function SmeltingProcedureAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Steel/SmeltingProcedure`
+  })
+}
+
+// 质量异议缺陷类型分布
+export function QualityDefectAPI() {
+  return request({
+    method: 'get',
+    url: `PMBoard/Steel/QualityDefect
+    `
+  })
+}
+
+// BOF出钢情况
+export function BOF_outSteelAPI() {
+  return request({
+    method: 'get',
+    url: `/PMBoard/Steel/BOF_outSteel
+    `
+  })
+}
+
+// 过程成分跟踪
+export function QCMTrackAPI(v) {
+  return request({
+    method: 'get',
+    url: `/PMBoard/Steel/QCMTrack`,
+    params: { type: v }
+  })
+}
+// 过程热度跟踪
+export function SuperHeatAPI() {
+  return request({
+    method: 'get',
+    url: `/PMBoard/Steel/SuperHeat`,
+  })
+}
+// 低倍缺陷TOP5
+export function QBDefectTop5API() {
+  return request({
+    method: 'get',
+    url: `/PMBoard/Steel/QBDefectTop5
+    `,
+  })
+}
+// 窄成分命中率TOP5
+export function narrow_componentAPI() {
+  return request({
+    method: 'get',
+    url: `/PMBoard/Steel/narrow_component`,
+  })
+}
+
+
+
+// 窄成分命中率趋势
+export function NarrowHitTrendAPI() {
+  return request({
+    method: 'get',
+    url: `/PMBoard/Steel/NarrowHitTrend
+
+    `,
+  })
+}
+
+// 低倍合格率趋势
+
+export function QBQualityTrendAPI() {
+  return request({
+    method: 'get',
+    url: `/PMBoard/Steel/QBQualityTrend
+
+    `,
+  })
+}
+
+export function QBDistributionAPI() {
+  return request({
+    method: 'get',
+    url: `/PMBoard/Steel/QBDistribution`,
+  })
+}
+
+
+

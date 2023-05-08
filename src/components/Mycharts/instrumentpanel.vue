@@ -8,17 +8,9 @@ import * as echarts from 'echarts'
 import { onMounted, ref, watch } from 'vue'
 export default {
   props: {
-    seriesData: {
-      type: Array,
-      default: () => {
-        return [
-          {
-            name: '示例',
-            data: [15, 51, 8, 46, 15, 51, 8, 46, 15, 51],
-            colors: ['rgba(	0, 255, 255, 1)', 'rgba(251, 213, 138, 0)']
-          }
-        ]
-      }
+    Data: {
+      type: Number,
+      default: 0
     },
 
     xdata: {
@@ -47,6 +39,10 @@ export default {
     title: {
       type: String,
       default: ' '
+    },
+    subtext: {
+      type: String,
+      default: ''
     }
   },
   setup(props) {
@@ -55,25 +51,19 @@ export default {
       drawLine() {
         // 初始化
         var myChart = echarts.init(line.value)
-
         // 配置项
         var datas = {
-          value: 80,
-          title: '健康度',
-          type: 1,
-          radiusType: 1
+          value: props.Data
         }
-
         var fontColor = '#fff'
         // var seriesName = ''
         let noramlSize = 12
         // let state = ''
-        let center = ['50%', '90%']
+        let center = ['50%', '75%']
         let nqradius, kdradius
-
         // wqradius = '100%'
-        nqradius = '150%'
-        kdradius = '65%'
+        nqradius = '145%'
+        kdradius = '26%'
 
         // let wqColor = 'rgba(80, 152, 237,0.9)'
         let nqColor = [
@@ -98,14 +88,24 @@ export default {
         ]
 
         let option = {
+          grid: {
+            // bottom: '10%'
+          },
           title: {
             show: true,
             x: 'center',
-            bottom: '20%',
+            top: '52%',
+            itemGap: 20,
             text: datas.value + '%',
             textStyle: {
               fontWeight: '700',
               fontSize: 15,
+              color: fontColor
+            },
+            // 副标题
+            subtext: `轧制计划号：${props.subtext}`,
+            subtextStyle: {
+              fontSize: 13,
               color: fontColor
             }
           },
@@ -118,14 +118,14 @@ export default {
               type: 'gauge',
               radius: kdradius,
               center: center,
-              startAngle: 180,
-              endAngle: 0,
+              startAngle: 176,
+              endAngle: 4,
               z: 7,
               splitNumber: 5,
               min: 0,
               max: 100,
               axisTick: {
-                show: true,
+                show: false,
                 lineStyle: {
                   color: '#fff',
                   width: 1
@@ -222,7 +222,6 @@ export default {
               pointer: {
                 show: false
               },
-
               detail: {
                 show: 0
               }

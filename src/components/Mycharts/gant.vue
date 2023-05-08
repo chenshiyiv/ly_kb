@@ -11,16 +11,9 @@ export default {
     seriesData: {
       type: Array,
       default: () => {
-        return [
-          {
-            name: '示例',
-            data: [15, 51, 8, 46, 15, 51, 8, 46, 15, 51],
-            colors: ['rgba(	0, 255, 255, 1)', 'rgba(251, 213, 138, 0)']
-          }
-        ]
+        return []
       }
     },
-
     xdata: {
       type: Array,
       default: () => {
@@ -68,7 +61,7 @@ export default {
               type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
             },
             formatter: function (params) {
-              console.log(params, ']]]]]]')
+              // console.log(params, ']]]]]]')
               var tar
               if (params[1].value != '-') {
                 tar = params[1]
@@ -79,7 +72,7 @@ export default {
             }
           },
           legend: {
-            data: ['支出', '收入'],
+            // data: ['支出', '收入'],
             left: '5%',
             top: '3%',
             textStyle: {
@@ -94,6 +87,7 @@ export default {
           },
           yAxis: {
             type: 'category',
+
             splitLine: { show: false },
             axisLine: {
               show: false,
@@ -101,32 +95,36 @@ export default {
                 color: '#fff'
               }
             },
-            data: (function () {
-              var list = []
-              for (var i = 1; i <= 11; i++) {
-                list.push(i + '月')
-              }
-              return list
-            })()
+            data: props.xdata
+
+            // data: (function () {
+            //   var list = []
+            //   for (var i = 1; i <= 11; i++) {
+            //     list.push(i)
+            //   }
+            //   return list
+            // })()
           },
           xAxis: {
+            show: false,
             splitLine: {
-              show: true,
+              show: false,
               lineStyle: { color: 'rgba(	105, 105, 105,0.6)', type: 'dashed' }
             },
             type: 'value',
             axisLine: {
-              show: true,
+              show: false,
               lineStyle: {
                 color: '#fff'
               }
-            }
+            },
+            axisTick: { show: false }
           },
           series: [
             {
-              name: '辅助',
+              name: '',
               type: 'bar',
-              stack: '总量',
+              stack: 'total',
               itemStyle: {
                 normal: {
                   barBorderColor: 'rgba(0,0,0,0)',
@@ -137,37 +135,25 @@ export default {
                   color: 'rgba(0,0,0,0)'
                 }
               },
-              data: [0, 900, 1245, 1530, 1376, 1376, 1511, 1689, 1856, 1495, 1292]
-            },
-            {
-              name: '收入',
-              type: 'bar',
-              stack: '总量',
-              label: {
-                normal: {
-                  show: true,
-                  position: 'right',
-                  textStyle: { color: '#fff' }
-                }
-              },
-              data: [900, 345, 393, '-', '-', 135, 178, 286, '-', '-', '-']
-            },
-            {
-              name: '支出',
-              type: 'bar',
-              stack: '总量',
-              label: {
-                normal: {
-                  show: true,
-                  position: 'right',
-                  textStyle: { color: '#fff' }
-                }
-              },
-              data: ['-', '-', '-', 108, 154, '-', '-', '-', 119, 361, 203]
+              data: props.seriesData[0] ? props.seriesData[0].data : []
             }
           ]
         }
-
+        props.seriesData.forEach(item => {
+          option.series.push({
+            name: item.name,
+            type: 'bar',
+            stack: 'total',
+            label: {
+              normal: {
+                show: true,
+                position: 'right',
+                textStyle: { color: '#fff' }
+              }
+            },
+            data: item.data
+          })
+        })
         myChart.setOption(option)
         myChart.clear()
         // 使用刚指定的配置项和数据显示图表。

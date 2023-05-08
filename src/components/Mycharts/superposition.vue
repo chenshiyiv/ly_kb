@@ -11,23 +11,21 @@ export default {
     seriesData: {
       type: Array,
       default: () => {
-        return [
-          {
-            name: '示例',
-            data: [15, 51, 8, 46, 15, 51, 8, 46, 15, 51],
-            colors: ['rgba(	0, 255, 255, 1)', 'rgba(251, 213, 138, 0)']
-          }
-        ]
+        return []
       }
     },
 
     xdata: {
       type: Array,
       default: () => {
-        return [0, 0, 0, 0]
+        return []
       }
     },
     legend: {
+      type: Boolean,
+      default: false
+    },
+    dataZoom: {
       type: Boolean,
       default: false
     },
@@ -57,35 +55,7 @@ export default {
         var myChart = echarts.init(line.value)
 
         // 配置项
-        var data = {
-          area: ['新荣区', '平城区', '云冈区', '云州区', '阳高县', '天镇县', '广灵县', '浑源县', '左云县'],
-          legend: [
-            '因病',
-            '因残',
-            '因学',
-            '因灾',
-            '缺土地',
-            '缺水',
-            '缺技术',
-            '缺资金',
-            '交通条件落后',
-            '自身发展动力不足',
-            '其他原因'
-          ],
-          data: [
-            [1320, 1302, 901, 634, 1390, 1330, 1320, 1000, 500],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50],
-            [320, 302, 301, 334, 390, 330, 320, 100, 50]
-          ]
-        }
+
         var colors = [
           '#4C98FB',
           '#83CCE7',
@@ -140,15 +110,15 @@ export default {
               fontSize: 14,
               color: '#96A4F4',
               padding: [3, 0, 0, 0]
-            },
-            data: data.legend
+            }
           },
           grid: {
             left: '3%',
             right: '4%',
-            bottom: '13%',
+            bottom: '22%',
             containLabel: true
           },
+
           xAxis: {
             type: 'category',
             axisLabel: {
@@ -163,7 +133,7 @@ export default {
             axisTick: {
               show: false
             },
-            data: data.area
+            data: props.xdata
           },
           yAxis: {
             type: 'value',
@@ -187,19 +157,34 @@ export default {
           },
           series: []
         }
-        for (var i = 0; i < data.legend.length; i++) {
+        if (props.dataZoom) {
+          option.dataZoom = [
+            {
+              type: 'inside',
+              start: 0,
+              end: 1
+            },
+            {
+              start: 0,
+              end: 5
+            }
+          ]
+        }
+
+        props.seriesData.forEach(item => {
           option.series.push({
-            name: data.legend[i],
+            name: item.name,
             type: 'bar',
-            stack: '总量',
-            barWidth: '45%',
+            stack: 'total',
+            barWidth: '10',
             label: {
               show: false,
               position: 'insideRight'
             },
-            data: data.data[i]
+            data: item.value || item.data
           })
-        }
+        })
+
         myChart.setOption(option)
         myChart.clear()
         // 使用刚指定的配置项和数据显示图表。

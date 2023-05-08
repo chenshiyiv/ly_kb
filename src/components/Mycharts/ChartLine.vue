@@ -140,8 +140,11 @@ export default {
                 }
               },
               axisLabel: {
-                //y轴文字的配置
-                textStyle: {}
+                //x轴文字的配置
+                rotate: 0,
+                textStyle: {
+                  fontSize: 10
+                }
               }
             }
           ],

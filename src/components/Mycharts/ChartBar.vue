@@ -11,19 +11,14 @@ export default {
     seriesData: {
       type: Array,
       default: () => {
-        return [
-          {
-            name: '示例',
-            data: [15, 51, 8, 46, 15, 51, 8, 46, 15, 51]
-          }
-        ]
+        return []
       }
     },
 
     xdata: {
       type: Array,
       default: () => {
-        return [0, 0, 0, 0]
+        return []
       }
     },
     legend: {
@@ -59,13 +54,17 @@ export default {
         let colorlist = [
           ['rgba(	0, 255, 255, 1)', 'rgba(251, 213, 138, 0)'],
           ['rgba(	173,109,255, 1)', 'rgba(173,109,255, 0)'],
-          ['rgba(	0, 255, 0, 1)', 'rgba(0, 241, 226, 0)']
+          ['rgba(	0, 255, 0, 1)', 'rgba(0, 241, 226, 0)'],
+          ['rgba(255, 69, 0, 1)', 'rgba(	255, 69, 0, 0)'],
+          ['rgba(255, 20, 147, 1)', 'rgba(255, 20, 147, 0)'],
+          ['rgba(	106, 90, 205, 1)', 'rgba(106, 90, 205, 0)'],
+          ['rgba(	139, 0, 139, 1)', 'rgba(139, 0, 139, 0)']
         ]
 
-        const seriesData = props.seriesData
+        // const seriesData = props.seriesData
 
         const getSeries = () => {
-          return seriesData.map((item, index) => {
+          return props.seriesData.map((item, index) => {
             return {
               name: item.name,
               type: 'bar',
@@ -111,6 +110,7 @@ export default {
           tooltip: {
             //提示框组件
             trigger: 'axis',
+
             // formatter: (params) => {
             //     return params.value
             // },
@@ -138,10 +138,13 @@ export default {
           },
           legend: {
             show: props.legend,
+            type: 'scroll',
+
             //图例组件，颜色和名字
             right: '10%',
             top: '2%',
             icon: 'circle',
+            left: '5%',
             itemGap: 16,
             itemWidth: 20,
             itemHeight: 13,

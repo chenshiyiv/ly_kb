@@ -11,28 +11,7 @@ export default {
     seriesData: {
       type: Array,
       default: () => {
-        return [
-          {
-            value: 522.38,
-            name: '1#棒材'
-          },
-          {
-            value: 448.72,
-            name: '2#棒材'
-          },
-          {
-            value: 432.89,
-            name: '3#棒材'
-          },
-          {
-            value: 328.71,
-            name: '4#棒材'
-          },
-          {
-            value: 311.28,
-            name: '5#棒材'
-          }
-        ]
+        return []
       }
     },
 
@@ -74,8 +53,7 @@ export default {
         // 配置项
         var colorList = ['#1e90ff', '#f36c6c', '#f36c6c', '#e6cf4e', '#e6cf4e', '#20d180', '#0093ff']
 
-        var datass = props.seriesData
-
+        console.log(props.seriesData, '-组件内部-')
         let option = {
           tooltip: {
             trigger: 'axis',
@@ -143,18 +121,18 @@ export default {
               splitArea: {
                 show: false
               },
-              data: datass.map(item => item.name)
+              data: props.seriesData.map(item => (item.name ? item.name : '无'))
             }
           ],
 
           series: [
             {
-              name: '方法',
+              name: '',
               type: 'bar',
               barCategoryGap: '50%',
               barGap: '100%',
               barWidth: 10,
-              data: datass.map(item => {
+              data: props.seriesData.map(item => {
                 var itemStyle = {
                   color: colorList[0],
                   barBorderRadius: [10, 10, 10, 10]

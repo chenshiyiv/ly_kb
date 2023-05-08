@@ -39,7 +39,13 @@ export default {
     xdata: {
       type: Array,
       default: () => {
-        return ['电炉', 'LF', 'VD', 'CCM', '加热炉', '轧线']
+        return []
+      }
+    },
+    ydata: {
+      type: Array,
+      default: () => {
+        return []
       }
     },
     legend: {
@@ -51,7 +57,7 @@ export default {
       default: () => {
         return {
           top: '22% ',
-          left: '3%',
+          left: '15%',
           right: '4%',
           height: '70%',
           bottom: '0',
@@ -89,8 +95,8 @@ export default {
           },
           grid: {
             top: '25%',
-            left: '8%',
-            right: '2%',
+            left: '15%',
+            right: '4%',
             bottom: '11%'
           },
           tooltip: {
@@ -100,7 +106,7 @@ export default {
             position: 'bottom',
             name: '',
             type: 'category',
-            data: ['电炉', 'LF', 'VD', 'CCM', '加热炉', '轧线'],
+            data: props.xdata,
             splitArea: {
               show: true
             },
@@ -122,7 +128,7 @@ export default {
           yAxis: {
             nameLocation: 'end',
             type: 'category',
-            data: ['1#', '2#', '3#'],
+            data: props.ydata,
             axisLine: {
               show: true,
               lineStyle: {
